@@ -1,0 +1,61 @@
+digraph {
+        compound = "true"
+        newrank = "true"
+        subgraph "root" {
+                "[root] aws_acm_certificate.cert (expand)" [label = "aws_acm_certificate.cert", shape = "box"]
+                "[root] aws_acm_certificate_validation.site (expand)" [label = "aws_acm_certificate_validation.site", shape = "box"]
+                "[root] aws_cloudfront_distribution.cdn (expand)" [label = "aws_cloudfront_distribution.cdn", shape = "box"]
+                "[root] aws_route53_record.root_domain (expand)" [label = "aws_route53_record.root_domain", shape = "box"]
+                "[root] aws_route53_record.verif-records (expand)" [label = "aws_route53_record.verif-records", shape = "box"]
+                "[root] aws_route53_record.www_domain (expand)" [label = "aws_route53_record.www_domain", shape = "box"]
+                "[root] aws_route53_zone.main (expand)" [label = "aws_route53_zone.main", shape = "box"]
+                "[root] aws_s3_bucket.site (expand)" [label = "aws_s3_bucket.site", shape = "box"]
+                "[root] aws_s3_bucket_acl.site (expand)" [label = "aws_s3_bucket_acl.site", shape = "box"]
+                "[root] aws_s3_bucket_policy.allow_access_from_cloudfront_OAI (expand)" [label = "aws_s3_bucket_policy.allow_access_from_cloudfront_OAI", shape = "box"]
+                "[root] data.aws_iam_policy_document.allow_access_from_cloudfront_OAI (expand)" [label = "data.aws_iam_policy_document.allow_access_from_cloudfront_OAI", shape = "box"]
+                "[root] gandi_livedns_record.site (expand)" [label = "gandi_livedns_record.site", shape = "box"]
+                "[root] output.cdn_domain" [label = "output.cdn_domain", shape = "note"]
+                "[root] output.route53_domain" [label = "output.route53_domain", shape = "note"]
+                "[root] output.s3_website_endpoint" [label = "output.s3_website_endpoint", shape = "note"]
+                "[root] provider[\"registry.terraform.io/go-gandi/gandi\"]" [label = "provider[\"registry.terraform.io/go-gandi/gandi\"]", shape = "diamond"]
+                "[root] provider[\"registry.terraform.io/hashicorp/aws\"]" [label = "provider[\"registry.terraform.io/hashicorp/aws\"]", shape = "diamond"]
+                "[root] var.AWS_REGION" [label = "var.AWS_REGION", shape = "note"]
+                "[root] var.DOMAIN_NAME" [label = "var.DOMAIN_NAME", shape = "note"]
+                "[root] var.GANDI_API_KEY" [label = "var.GANDI_API_KEY", shape = "note"]
+                "[root] var.SUB_DOMAIN_NAME" [label = "var.SUB_DOMAIN_NAME", shape = "note"]
+                "[root] aws_acm_certificate.cert (expand)" -> "[root] local.FQDN (expand)"
+                "[root] aws_acm_certificate.cert (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+                "[root] aws_acm_certificate_validation.site (expand)" -> "[root] aws_route53_record.verif-records (expand)"
+                "[root] aws_cloudfront_distribution.cdn (expand)" -> "[root] aws_acm_certificate_validation.site (expand)"
+                "[root] aws_route53_record.root_domain (expand)" -> "[root] aws_cloudfront_distribution.cdn (expand)"
+                "[root] aws_route53_record.verif-records (expand)" -> "[root] aws_acm_certificate.cert (expand)"
+                "[root] aws_route53_record.verif-records (expand)" -> "[root] aws_route53_zone.main (expand)"
+                "[root] aws_route53_record.www_domain (expand)" -> "[root] aws_cloudfront_distribution.cdn (expand)"
+                "[root] aws_route53_zone.main (expand)" -> "[root] local.FQDN (expand)"
+                "[root] aws_route53_zone.main (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+                "[root] aws_s3_bucket.site (expand)" -> "[root] local.FQDN (expand)"
+                "[root] aws_s3_bucket.site (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+                "[root] aws_s3_bucket_acl.site (expand)" -> "[root] aws_s3_bucket.site (expand)"
+                "[root] aws_s3_bucket_policy.allow_access_from_cloudfront_OAI (expand)" -> "[root] data.aws_iam_policy_document.allow_access_from_cloudfront_OAI (expand)"
+                "[root] data.aws_iam_policy_document.allow_access_from_cloudfront_OAI (expand)" -> "[root] aws_s3_bucket.site (expand)"
+                "[root] gandi_livedns_record.site (expand)" -> "[root] aws_route53_zone.main (expand)"
+                "[root] gandi_livedns_record.site (expand)" -> "[root] provider[\"registry.terraform.io/go-gandi/gandi\"]"
+                "[root] local.FQDN (expand)" -> "[root] var.DOMAIN_NAME"
+                "[root] local.FQDN (expand)" -> "[root] var.SUB_DOMAIN_NAME"
+                "[root] output.cdn_domain" -> "[root] aws_cloudfront_distribution.cdn (expand)"
+                "[root] output.route53_domain" -> "[root] aws_route53_record.root_domain (expand)"
+                "[root] output.s3_website_endpoint" -> "[root] aws_s3_bucket.site (expand)"
+                "[root] provider[\"registry.terraform.io/go-gandi/gandi\"] (close)" -> "[root] gandi_livedns_record.site (expand)"
+                "[root] provider[\"registry.terraform.io/go-gandi/gandi\"]" -> "[root] var.GANDI_API_KEY"
+                "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_route53_record.root_domain (expand)"
+                "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_route53_record.www_domain (expand)"
+                "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_s3_bucket_acl.site (expand)"
+                "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_s3_bucket_policy.allow_access_from_cloudfront_OAI (expand)"
+                "[root] provider[\"registry.terraform.io/hashicorp/aws\"]" -> "[root] var.AWS_REGION"
+                "[root] root" -> "[root] output.cdn_domain"
+                "[root] root" -> "[root] output.route53_domain"
+                "[root] root" -> "[root] output.s3_website_endpoint"
+                "[root] root" -> "[root] provider[\"registry.terraform.io/go-gandi/gandi\"] (close)"
+                "[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)"
+        }
+}
