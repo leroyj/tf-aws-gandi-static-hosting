@@ -1,0 +1,6 @@
+# The initialize-terraforme.sh script populate the 3 following env variable for you.
+# Override them if you don't want to use the values of the aws cli default profile
+# Remember to secure the access to this file and to not share it with anyone (git)
+#AWS_REGION=""
+#AWS_ACCESS_KEY_ID=""
+#AWS_SECRET_ACCESS_KEY=""

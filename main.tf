@@ -29,7 +29,6 @@ terraform {
   }
 }
 
-
 provider "gandi" {
   key = var.GANDI_API_KEY
 }
@@ -58,23 +57,6 @@ locals {
   ]
 }
 
-
-# module "terraform-djoo-static-website-aws-gandi" {
-#   source = "./modules/terraform-djoo-static-website-aws-gandi"
-#   GANDI_API_KEY = var.GANDI_API_KEY
-#   AWS_REGION = var.AWS_REGION
-#   DOMAIN_NAME = var.DOMAIN_NAME
-#   SUB_DOMAIN_NAME = "test"
-#   S3_BUCKET_FORCE_DESTROY = "true"
-# }
-# module "terraform-djoo-static-website-aws-gandi2" {
-#   source = "./modules/terraform-djoo-static-website-aws-gandi"
-#   GANDI_API_KEY = var.GANDI_API_KEY
-#   AWS_REGION = var.AWS_REGION
-#   DOMAIN_NAME = var.DOMAIN_NAME
-#   SUB_DOMAIN_NAME = "test2"
-#   S3_BUCKET_FORCE_DESTROY = "true"
-# }
 module "test-djoo-org" {
   source = "./modules/terraform-djoo-static-website-aws-gandi"
   GANDI_API_KEY = var.GANDI_API_KEY
@@ -92,3 +74,12 @@ module "test2-djoo-org" {
   SUB_DOMAIN_NAME = "test2"
   S3_BUCKET_FORCE_DESTROY = var.S3_BUCKET_FORCE_DESTROY
 }
+
+# module "test9-djoo-org" {
+#   source = "./modules/terraform-djoo-static-website-aws-gandi"
+#   GANDI_API_KEY = var.GANDI_API_KEY
+#   AWS_REGION = var.AWS_REGION
+#   DOMAIN_NAME = var.DOMAIN_NAME
+#   SUB_DOMAIN_NAME = "test9"
+#   S3_BUCKET_FORCE_DESTROY = var.S3_BUCKET_FORCE_DESTROY
+# }
