@@ -1,4 +1,4 @@
-# Terraform static s3 hosting using a custom domain name managed outside aws
+# Terraform static s3 hosting using a custom domain name managed outside aws (gandi)
 
 ## Why this project?
 
